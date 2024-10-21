@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Turf Booking - Central Park Soccer Field</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+  </head>
+  <body
+    class="min-h-screen bg-gradient-to-b from-green-50 to-green-100 py-12 px-4 sm:px-6 lg:px-8"
+  >
+    <div class="max-w-7xl mx-auto">
+      <h1
+        id="turfName"
+        class="text-4xl md:text-5xl font-bold mb-8 text-center text-green-800"
+      >
+        Central Park Soccer Field
+      </h1>
+
+      <!-- Image Carousel -->
+      <div
+        class="relative mb-12 rounded-lg overflow-hidden shadow-xl h-64 md:h-96 max-w-4xl mx-auto"
+      >
+        <div id="carouselImages" class="w-full h-full"></div>
+        <button
+          id="prevImage"
+          class="absolute left-2 top-1/2 transform -translate-y-1/2 bg-black bg-opacity-50 text-white p-2 rounded-full"
+        >
+          <i class="fas fa-chevron-left w-6 h-6"></i>
+        </button>
+        <button
+          id="nextImage"
+          class="absolute right-2 top-1/2 transform -translate-y-1/2 bg-black bg-opacity-50 text-white p-2 rounded-full"
+        >
+          <i class="fas fa-chevron-right w-6 h-6"></i>
+        </button>
+      </div>
+
+      <!-- Turf Details -->
+      <div class="bg-white shadow-md rounded-lg p-6 mb-8">
+        <h2 class="text-2xl font-semibold mb-4 text-green-700">Turf Details</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-gray-600">
+          <div>
+            <p class="flex items-center">
+              <i class="fas fa-map-marker-alt w-5 h-5 mr-2 text-green-600"></i>
+              <span><strong>Area:</strong> <span id="turfArea"></span></span>
+            </p>
+            <p class="flex items-center mt-2">
+              <i class="fas fa-city w-5 h-5 mr-2 text-green-600"></i>
+              <span><strong>City:</strong> <span id="turfCity"></span></span>
+            </p>
+            <p class="flex items-center mt-2">
+              <i class="fas fa-map w-5 h-5 mr-2 text-green-600"></i>
+              <span
+                ><strong>Address:</strong> <span id="turfAddress"></span
+              ></span>
+            </p>
+          </div>
+          <div>
+            <p class="flex items-center">
+              <i class="fas fa-star w-5 h-5 mr-2 text-yellow-500"></i>
+              <span
+                ><strong>Rating:</strong> <span id="turfRating"></span>/5</span
+              >
+            </p>
+            <p class="flex items-center mt-2">
+              <i class="fas fa-phone w-5 h-5 mr-2 text-green-600"></i>
+              <span><strong>Phone:</strong> <span id="turfPhone"></span></span>
+            </p>
+            <p class="flex items-center mt-2">
+              <i class="fas fa-envelope w-5 h-5 mr-2 text-green-600"></i>
+              <span><strong>Email:</strong> <span id="turfEmail"></span></span>
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Booking Form -->
+      <div class="bg-white shadow-md rounded-lg p-6 mb-8">
+        <h2 class="text-2xl font-semibold mb-4 text-green-700">Book a Slot</h2>
+        <form id="bookingForm">
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+              <label
+                for="userName"
+                class="block text-sm font-medium text-gray-700"
+                >Name</label
+              >
+              <input
+                type="text"
+                id="userName"
+                name="user_name"
+                required
+                class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-green-500 focus:border-green-500 sm:text-sm"
+              />
+            </div>
+            <div>
+              <label
+                for="userEmail"
+                class="block text-sm font-medium text-gray-700"
+                >Email</label
+              >
+              <input
+                type="email"
+                id="userEmail"
+                name="user_email"
+                required
+                class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-green-500 focus:border-green-500 sm:text-sm"
+              />
+            </div>
+            <div>
+              <label
+                for="timeSlot"
+                class="block text-sm font-medium text-gray-700"
+                >Time Slot</label
+              >
+              <select
+                id="timeSlot"
+                name="time_slot"
+                required
+                class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 pl-10 pr-3 focus:outline-none focus:ring-green-500 focus:border-green-500 sm:text-sm"
+              >
+                <option value="">Select a time slot</option>
+              </select>
+            </div>
+            <div>
+              <label for="sport" class="block text-sm font-medium text-gray-700"
+                >Sport</label
+              >
+              <select
+                id="sport"
+                name="sport"
+                required
+                class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-green-500 focus:border-green-500 sm:text-sm"
+              >
+                <option value="">Select a sport</option>
+              </select>
+            </div>
+            <div>
+              <label
+                for="bookingDate"
+                class="block text-sm font-medium text-gray-700"
+                >Date</label
+              >
+              <div class="relative">
+                <div
+                  class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none"
+                >
+                  <i class="fas fa-calendar text-gray-400"></i>
+                </div>
+                <input
+                  type="date"
+                  id="bookingDate"
+                  name="booking_date"
+                  required
+                  class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 pl-10 pr-3 focus:outline-none focus:ring-green-500 focus:border-green-500 sm:text-sm"
+                />
+              </div>
+            </div>
+          </div>
+          <div class="mt-6">
+            <button
+              type="submit"
+              class="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500"
+            >
+              Book Now
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+    <script>
+      document.addEventListener("DOMContentLoaded", function() {
+          const urlParams = new URLSearchParams(window.location.search);
+          const turfId = urlParams.get('id');
+  
+          if (turfId) {
+              fetch(`get_turf_data.php?id=${turfId}`)
+                  .then(response => response.json())
+                  .then(data => {
+                      if (data.status === "success") {
+                          const turfData = data.turfData;
+                          const availableTimeSlots = data.timeSlots;
+                          const availableSports = data.sports;
+                          const images = data.images;
+  
+                          // Populate turf data
+                          document.getElementById('turfName').textContent = turfData.name;
+                          document.getElementById('turfArea').textContent = turfData.area;
+                          document.getElementById('turfCity').textContent = turfData.city;
+                          document.getElementById('turfAddress').textContent = turfData.address;
+                          document.getElementById('turfRating').textContent = turfData.rating;
+                          document.getElementById('turfPhone').textContent = turfData.phone;
+                          document.getElementById('turfEmail').textContent = turfData.email;
+  
+                          // Populate time slots
+                          console.log(availableTimeSlots);
+                          
+                          const timeSlotSelect = document.getElementById('timeSlot');
+                          availableTimeSlots.forEach(slot => {
+                              const option = document.createElement('option');
+                              console.log(slot);
+                              
+                              option.value = slot;
+                              option.textContent = slot;
+                              timeSlotSelect.appendChild(option);
+                          });
+  
+                          // Populate sports
+                          const sportSelect = document.getElementById('sport');
+                          sportSelect.innerHTML = '<option value="">Select a sport</option>'; // Clear existing options
+                          availableSports.forEach(sport => {
+                              const option = document.createElement('option');
+                              option.value = sport;
+                              option.textContent = sport;
+                              sportSelect.appendChild(option);
+                          });
+  
+                          // Populate images in carousel
+                          const carouselImages = document.getElementById('carouselImages');
+                          images.forEach((image, index) => {
+                              const imgElement = document.createElement('img');
+                              imgElement.src = `/turfbooking/admin/uploads/${image}`;
+                              imgElement.alt = `Turf image ${index + 1}`;
+                              imgElement.className = 'w-full h-full object-cover';
+                              imgElement.style.display = index === 0 ? 'block' : 'none';
+                              carouselImages.appendChild(imgElement);
+                          });
+  
+                          let currentImageIndex = 0;
+                          const totalImages = images.length;
+  
+                          document.getElementById('prevImage').addEventListener('click', () => {
+                              carouselImages.children[currentImageIndex].style.display = 'none';
+                              currentImageIndex = (currentImageIndex - 1 + totalImages) % totalImages;
+                              carouselImages.children[currentImageIndex].style.display = 'block';
+                          });
+  
+                          document.getElementById('nextImage').addEventListener('click', () => {
+                              carouselImages.children[currentImageIndex].style.display = 'none';
+                              currentImageIndex = (currentImageIndex + 1) % totalImages;
+                              carouselImages.children[currentImageIndex].style.display = 'block';
+                          });
+                      } else {
+                          alert(data.message);
+                      }
+                  })
+                  .catch(error => console.error('Error fetching turf data:', error));
+          } else {
+              alert("Invalid turf ID.");
+          }
+  
+          // Handle booking submission
+          document.getElementById('bookingForm').addEventListener('submit', function(event) {
+              event.preventDefault();
+              handleBooking();
+          });
+
+          function handleBooking() {
+              const formData = new FormData();
+              formData.append('turf_id', turfId); // Assuming turf_id is 1 for this example
+              formData.append('name', document.getElementById('userName').value);
+              formData.append('phone', document.getElementById('turfPhone').textContent);
+              formData.append('email', document.getElementById('userEmail').value);
+              formData.append('date', document.getElementById('bookingDate').value);
+              formData.append('time_slot', document.getElementById('timeSlot').value);
+
+              fetch('book_turf.php', {
+                  method: 'POST',
+                  body: formData
+              })
+              .then(response => response.json())
+              .then(data => {
+                  if (data.status === 'success') {
+                      alert('Slot booked successfully!');
+                      document.getElementById('bookingForm').reset();
+                  } else {
+                      alert(data.message);
+                  }
+              })
+              .catch(error => {
+                  console.error('Error booking slot:', error);
+              });
+          }
+      });
+  </script>
+  </body>
+</html>

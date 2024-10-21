@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register Turf - Book My Turf</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="min-h-screen bg-gray-900 text-white py-12 px-4 sm:px-6 lg:px-8">
+    <div class="max-w-4xl mx-auto">
+        <div class="text-center mb-8">
+            <h1 class="text-4xl font-bold mb-4 text-emerald-400">Register Your Turf</h1>
+            <p class="text-lg text-gray-300 mb-4">Join our network of amazing sports venues</p>
+            <p class="text-sm text-gray-400">
+                Already registered? 
+                <a href="admin_login.html" class="font-medium text-emerald-400 hover:text-emerald-300 transition duration-150 ease-in-out">
+                    Log in here
+                </a>
+            </p>
+        </div>
+        <div class="bg-gray-800 shadow-xl rounded-lg p-8 mb-8">
+            <form id="registerTurfForm" action="save_turf.php" method="POST" enctype="multipart/form-data" class="space-y-6">
+                <!-- Turf Details -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                        <label for="name" class="block text-sm font-medium text-gray-300">Turf Name</label>
+                        <input type="text" id="name" name="name" required class="mt-1 block w-full bg-gray-700 border border-gray-600 rounded-md shadow-sm py-2 px-3 text-white focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent">
+                    </div>
+                    <div>
+                        <label for="email" class="block text-sm font-medium text-gray-300">Email</label>
+                        <input type="email" id="email" name="email" required class="mt-1 block w-full bg-gray-700 border border-gray-600 rounded-md shadow-sm py-2 px-3 text-white focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent">
+                    </div>
+                    <div>
+                        <label for="phone" class="block text-sm font-medium text-gray-300">Phone</label>
+                        <input type="tel" id="phone" name="phone" required class="mt-1 block w-full bg-gray-700 border border-gray-600 rounded-md shadow-sm py-2 px-3 text-white focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent">
+                    </div>
+                    <div>
+                        <label for="address" class="block text-sm font-medium text-gray-300">Address</label>
+                        <input type="text" id="address" name="address" required class="mt-1 block w-full bg-gray-700 border border-gray-600 rounded-md shadow-sm py-2 px-3 text-white focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent">
+                    </div>
+                    <div>
+                        <label for="city" class="block text-sm font-medium text-gray-300">City</label>
+                        <input type="text" id="city" name="city" required class="mt-1 block w-full bg-gray-700 border border-gray-600 rounded-md shadow-sm py-2 px-3 text-white focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent">
+                    </div>
+                    <div>
+                        <label for="area" class="block text-sm font-medium text-gray-300">Area</label>
+                        <input type="text" id="area" name="area" required class="mt-1 block w-full bg-gray-700 border border-gray-600 rounded-md shadow-sm py-2 px-3 text-white focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent">
+                    </div>
+                    <div>
+                        <label for="rating" class="block text-sm font-medium text-gray-300">Rating</label>
+                        <input type="number" step="0.1" id="rating" name="rating" required class="mt-1 block w-full bg-gray-700 border border-gray-600 rounded-md shadow-sm py-2 px-3 text-white focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent">
+                    </div>
+                    <div>
+                        <label for="password" class="block text-sm font-medium text-gray-300">Password</label>
+                        <input type="password" id="password" name="password" required class="mt-1 block w-full bg-gray-700 border border-gray-600 rounded-md shadow-sm py-2 px-3 text-white focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent">
+                    </div>
+                    <div class="md:col-span-2">
+                        <label for="images" class="block text-sm font-medium text-gray-300">Images</label>
+                        <input type="file" id="images" name="images[]" multiple class="mt-1 block w-full text-sm text-gray-400 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-emerald-600 file:text-white hover:file:bg-emerald-700">
+                    </div>
+                </div>
+
+                <!-- Time Slots -->
+                <div>
+                    <label class="block text-sm font-medium text-gray-300 mb-2">Time Slots</label>
+                    <div id="timeSlotsContainer" class="space-y-2"></div>
+                    <button type="button" id="addTimeSlot" class="mt-2 inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-emerald-600 hover:bg-emerald-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-emerald-500 transition duration-150 ease-in-out">
+                        <i class="fas fa-plus mr-2"></i> Add Time Slot
+                    </button>
+                </div>
+
+                <!-- Sports -->
+                <div>
+                    <label class="block text-sm font-medium text-gray-300 mb-2">Sports</label>
+                    <div id="sportsContainer" class="space-y-2"></div>
+                    <button type="button" id="addSport" class="mt-2 inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-emerald-600 hover:bg-emerald-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-emerald-500 transition duration-150 ease-in-out">
+                        <i class="fas fa-plus mr-2"></i> Add Sport
+                    </button>
+                </div>
+                
+                <!-- Affiliated People -->
+                <div>
+                    <label class="block text-sm font-medium text-gray-300 mb-2">Affiliated People</label>
+                    <div id="affiliatedPeopleContainer" class="space-y-2">
+                        <div class="flex space-x-2">
+                            <input type="text" name="affiliated_people[0][name]" placeholder="Name" class="flex-1 px-3 py-2 bg-gray-700 border border-gray-600 rounded-md text-white focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent">
+                            <input type="tel" name="affiliated_people[0][mobile]" placeholder="Mobile" class="flex-1 px-3 py-2 bg-gray-700 border border-gray-600 rounded-md text-white focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent">
+                        </div>
+                    </div>
+                    <button type="button" id="addPerson" class="mt-2 inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-emerald-600 hover:bg-emerald-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-emerald-500 transition duration-150 ease-in-out">
+                        <i class="fas fa-plus mr-2"></i> Add Person
+                    </button>
+                </div>
+
+                <!-- Submit Button -->
+                <div>
+                    <button type="submit" class="w-full flex justify-center py-3 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-emerald-600 hover:bg-emerald-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-emerald-500 transition duration-150 ease-in-out">
+                        Register Turf
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        let timeSlotCount = 0;
+        let sportCount = 0;
+        let personCount = 1;
+
+        document.getElementById("addPerson").addEventListener("click", function () {
+            const personDiv = document.createElement("div");
+            personDiv.className = "flex space-x-2";
+            personDiv.innerHTML = `
+                <input type="text" name="affiliated_people[${personCount}][name]" placeholder="Name" class="flex-1 px-3 py-2 bg-gray-700 border border-gray-600 rounded-md text-white focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent">
+                <input type="tel" name="affiliated_people[${personCount}][mobile]" placeholder="Mobile" class="flex-1 px-3 py-2 bg-gray-700 border border-gray-600 rounded-md text-white focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent">
+                <button type="button" class="remove-person px-2 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500">
+                    <i class="fas fa-trash"></i>
+                </button>
+            `;
+            document.getElementById("affiliatedPeopleContainer").appendChild(personDiv);
+            personCount++;
+        });
+
+        document.getElementById("addTimeSlot").addEventListener("click", function () {
+            timeSlotCount++;
+            const timeSlotDiv = document.createElement("div");
+            timeSlotDiv.className = "flex space-x-2";
+            timeSlotDiv.innerHTML = `
+                <select name="time_slots[]" class="flex-1 px-3 py-2 bg-gray-700 border border-gray-600 rounded-md text-white focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent">
+                    <option value="">Select a time slot</option>
+                    <option value="06:00 AM - 07:00 AM">06:00 AM - 07:00 AM</option>
+                    <option value="07:00 AM - 08:00 AM">07:00 AM - 08:00 AM</option>
+                    <option value="08:00 AM - 09:00 AM">08:00 AM - 09:00 AM</option>
+                    <option value="09:00 AM - 10:00 AM">09:00 AM - 10:00 AM</option>
+                    <option value="10:00 AM - 11:00 AM">10:00 AM - 11:00 AM</option>
+                    <option value="11:00 AM - 12:00 PM">11:00 AM - 12:00 PM</option>
+                    <option value="12:00 PM - 01:00 PM">12:00 PM - 01:00 PM</option>
+                    <option value="01:00 PM - 02:00 PM">01:00 PM - 02:00 PM</option>
+                    <option value="02:00 PM - 03:00 PM">02:00 PM - 03:00 PM</option>
+                    <option value="03:00 PM - 04:00 PM">03:00 PM - 04:00 PM</option>
+                    <option value="04:00 PM - 05:00 PM">04:00 PM - 05:00 PM</option>
+                    <option value="05:00 PM - 06:00 PM">05:00 PM - 06:00 PM</option>
+                    <option value="06:00 PM - 07:00 PM">06:00 PM - 07:00 PM</option>
+                    <option value="07:00 PM - 08:00 PM">07:00 PM - 08:00 PM</option>
+                    <option value="08:00 PM - 09:00 PM">08:00 PM - 09:00 PM</option>
+                    <option value="09:00 PM - 10:00 PM">09:00 PM - 10:00 PM</option>
+                    <option value="10:00 PM - 11:00 PM">10:00 PM - 11:00 PM</option>
+                </select>
+                <button type="button" class="remove-time-slot px-2 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500">
+                    <i class="fas fa-trash"></i>
+                </button>
+            `;
+            document.getElementById("timeSlotsContainer").appendChild(timeSlotDiv);
+        });
+
+        document.getElementById("addSport").addEventListener("click", function () {
+            sportCount++;
+            const sportDiv = document.createElement("div");
+            sportDiv.className = "flex space-x-2";
+            sportDiv.innerHTML = `
+                <input type="text" name="sports[]" placeholder="Sport" class="flex-1 px-3 py-2 bg-gray-700 border border-gray-600 rounded-md text-white focus:outline-none focus:ring-2 focus:ring-emerald-500  focus:border-transparent">
+                <button type="button" class="remove-sport px-2 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500">
+                    <i class="fas fa-trash"></i>
+                </button>
+            `;
+            document.getElementById("sportsContainer").appendChild(sportDiv);
+        });
+
+        // Remove dynamically added fields
+        document.addEventListener("click", function (e) {
+            if (e.target && e.target.classList.contains("remove-person")) {
+                e.target.parentElement.remove();
+            }
+            if (e.target && e.target.classList.contains("remove-time-slot")) {
+                e.target.parentElement.remove();
+            }
+            if (e.target && e.target.classList.contains("remove-sport")) {
+                e.target.parentElement.remove();
+            }
+        });
+    </script>
+</body>
+</html>

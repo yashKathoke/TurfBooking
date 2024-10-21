@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html class="w-full h-full" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <link
+    href="https://cdn.jsdelivr.net/npm/remixicon@4.3.0/fonts/remixicon.css"
+    rel="stylesheet"
+    <title>Book My Turf</title>
+/>  <style>
+    /* Keyframes for fading in elements */
+    @keyframes fadeIn {
+        0% {
+            opacity: 0;
+            transform: translateY(100px); /* Move text up slightly */
+        }
+        100% {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    /* Apply the fade-in animation */
+    .fade-in {
+        animation: fadeIn 1s ease-in-out forwards;
+        opacity: 0; /* Start hidden until animation triggers */
+    }
+
+    /* Keyframes for the intro section fade out */
+    @keyframes fadeOut {
+        from {
+            opacity: 1;
+        }
+        to {
+            opacity: 0;
+            visibility: hidden;
+        }
+    }
+
+    #introSection {
+        animation: fadeOut 1s ease-in-out forwards 4s; /* Fades out after 2 seconds */
+    }
+
+    /* Fade effect for each word in the intro */
+    .animate-word1 {
+        animation: fadeIn 1s ease-out forwards;
+    }
+    .animate-word2 {
+        animation: fadeIn 1s ease-out forwards 1s; /* Delay by 1 second */
+    }
+    .animate-word3 {
+        animation: fadeIn 1s ease-out forwards 2s; /* Delay by 2 seconds */
+    }
+    .animate-word4 {
+        animation: fadeIn 1s ease-out forwards 3s; /* Delay by 3 seconds */
+    }
+    </style>
+</head>
+<body class="bg-black w-full h-full">
+    
+    <div id="introSection" class="flex items-center justify-center h-screen w-full bg-black absolute top-0 left-0 z-50">
+        <h1 class="text-white text-8xl font-bold flex space-x-4">
+            <span class="  block animate-word1">Let</span>
+            <span class="  block animate-word2">The</span>
+            <span class="  block animate-word3">World</span>
+            <span class="  block animate-word4">Play</span>
+        </h1>
+    </div>
+
+
+
+    
+    
+   
+    <video id="delayedVideo" class="absolute top-0 left-0 w-full h-full object-cover z-0 opacity-70" muted preload="none" loop>
+        <source src="video.mp4" type="video/mp4">
+    </video>
+
+
+
+   
+    <section class="relative  text-white p-8 w-full h-full -m-3  z-10">
+        <nav class="container  p-0 flex justify-between items-center ">
+            <div class="text-xl font-bold text-white">Book My Turf</div>
+            <ul class=" flex space-x-4">
+                <li><a href="#" class="text-white hover:text-blue-500">Home</a></li>
+                <li><a href="#" class="text-white hover:text-blue-500">Features</a></li>
+                <li><a href="#" class="text-white hover:text-blue-500">Sports</a></li>
+            </ul>
+        </nav>
+
+        <div class=" p-10 mt-52">
+            <h1 class=" font-serif text-4xl font-bold">Welcome to Book My Turf</h1>
+            <h1 class="  text-xl  mt-2 text-green-400 font-bold">Discover amazing spots to play games.</h1>
+            <button class=" mt-4 m-2 rounded-full px-6 py-2 bg-green-400 text-white " onclick="bookTurf()">Book Turf</button>
+            <button class=" mt-4 m-2 rounded-full px-6 py-2 bg-green-400 text-white " onclick="getListed()">Get Listed</button>
+        </div>
+    </section>
+
+    <section class="container w-full h-full flex">
+        <div class="w-1/2 h-96 bg-black ">
+            <div class="w-full h-full mt-44  bg-no-repeat bg-cover bg-left"
+            style="background-image: url('./images/isometric-running-mobile-app-infographic.png'); background-size: cover;">
+          
+        </div>
+      
+                    
+        </div>
+        <div class="w-1/2 h-full bg-green-500 ">
+            <div class=" p-6 mt-56 m-20  font-serif text-4xl font-bold    ">
+                <h1 >Book My Turf </h1>
+                <h1>Has Presence in Bibwewadi </h1>
+                <h1 class="text-2xl">Join with us</h1>
+            </div>
+        </div>
+       
+
+    </section>
+
+
+    
+        <nav class="w-full h-3/4 bg-white flex item-center justify-center ">
+      
+            <div class="m-40 mx-20  " >
+                <div class="text-6xl  mx-40 m-10 "><i class=" ri-menu-search-line "></i> </div>
+               <div> Are you looking to play after work <br> organize your Sunday Five's football match? <br>
+            Explore the largest network of sports facilities whole over the India
+             </div>
+            </div>
+                <div class="m-40 mx-20 ">
+            <div class="text-6xl  mx-40 m-10">
+                <i class="ri-calendar-check-line"></i>
+            </div>
+            <div>Once you’ve found the perfect ground, court or gym,<br>
+                 Connect with the venue through the Book Now Button to make online booking & secure easier payment</div>
+                </div>
+                <div class="m-40 mx-20 "> 
+                    
+            <div class="text-6xl mx-40 m-10 ">
+                <i class="ri-football-line"></i>
+            </div>
+                <div>You’re the hero, you’ve found a stunning turf or court,<br>
+                     booked with ease and now its time to play. The scene is set for your epic match.</div>
+             
+        </div>
+                    
+        </nav>
+
+
+        <section class="container w-full h-full flex ">
+            <nav class="text-white text-5xl">
+                <div class="text-bold">
+                    <h1 class="font-bold m-10 mt-48 ml-40 font-serif text-green-400">Meet Your Pals <br> Over a Game</h1>
+                    
+                    <div class="text-lg ml-24">
+                        <h2 class="ml-16">Want to play games?</h2>
+                        <h2 class="ml-16">You can invite a team or join a pre-scheduled match through PlaySpots.</h2>
+                    </div>
+                </div>
+            </nav>
+            
+            <!-- Image section with Tailwind CSS for size and positioning -->
+            <div class="w-3/6 h-auto bg-no-repeat bg-cover bg-left"
+                style="background-image: url('./images/young-people-with-footballs.png'); background-size: cover;">
+                <!-- Optionally, you can add content here if needed -->
+            </div>
+        </section>
+
+        <section class="container w-full h-3/4 flex">
+            <div class="w-1/2 h-full bg-green-500 ">
+                        <div class="font-serif font-bold  m-12  text-white mt-30 ml-40">
+                           <h1 class="text-4xl"> Play More </h1>
+                            <h1 class="text-4xl ml-7">Pay Less</h1>
+                        </div>
+                        <div class="w-full h-full bg-no-repeat bg-cover fade-in -mt-56"
+                        style="background-image: url('./images/isometric-phone-with-chat-concept.png'); background-size: cover;">
+                    </div>
+            </div>
+            <div class="w-1/2 h-full bg-white ">
+                <div class="w-full h-full bg-white flex justify-center items-center">
+                    <div class="m-56  ml-44 font-serif font-bold  flex-col justify-center items-center">
+                      <h1 class="text-6xl text-green-500 ">Pay Online</h1>
+                      <h1 class=" mt-5 text-3xl ">To Get Discount</h1>
+                    </div>
+                  </div>
+                  
+           
+    
+        </section>
+
+  
+        <footer class="bg-gray-900 text-white py-8">
+            <div class="container mx-auto flex justify-between items-center">
+                <!-- Left side: Company info -->
+                <div>
+                    <h1 class="text-2xl font-bold">Book My Turf</h1>
+                    <p class="mt-2 text-gray-400">Find your perfect sports ground or turf. Play more, pay less.</p>
+                    <p class="mt-2 text-gray-400">Bibwewadi, Pune, India</p>
+                    <p class="mt-2 text-gray-400">Email: contact@bookmyturf.com</p>
+                </div>
+        
+                <!-- Center: Social media icons -->
+                <div class="flex space-x-4">
+                    <a href="#" class="text-white hover:text-blue-500 text-3xl">
+                        <i class="ri-facebook-circle-fill"></i>
+                    </a>
+                    <a href="#" class="text-white hover:text-blue-400 text-3xl">
+                        <i class="ri-twitter-fill"></i>
+                    </a>
+                    <a href="#" class="text-white hover:text-pink-500 text-3xl">
+                        <i class="ri-instagram-fill"></i>
+                    </a>
+                    <a href="#" class="text-white hover:text-red-600 text-3xl">
+                        <i class="ri-youtube-fill"></i>
+                    </a>
+                </div>
+        
+                <!-- Right side: Quick links -->
+                <div>
+                    <h2 class="text-xl font-bold">Quick Links</h2>
+                    <ul class="mt-2 space-y-2 text-gray-400">
+                        <li><a href="#" class="hover:text-green-400">Home</a></li>
+                        <li><a href="#" class="hover:text-green-400">Features</a></li>
+                        <li><a href="#" class="hover:text-green-400">Sports</a></li>
+                        <li><a href="#" class="hover:text-green-400">Contact</a></li>
+                    </ul>
+                </div>
+            </div>
+        
+            <!-- Bottom line -->
+            <div class="mt-8 border-t border-gray-700 pt-4 text-center text-gray-400">
+                <p>&copy; 2024 Book My Turf. All rights reserved.</p>
+            </div>
+        </footer>
+        
+
+    
+  
+
+   
+        <script>
+
+            const bookTurf = () => {
+                window.location = `/turfbooking/user/index.php`
+            }
+
+            const getListed = () => {
+                window.location = `/turfbooking/admin/admin_signup.html`
+            }
+            // Get the video element
+            const video = document.getElementById('delayedVideo');
+    
+            // Delay the video playback by 2 seconds
+            window.onload = function() {
+                setTimeout(function() {
+                    // Load the video and start playing
+                    video.load(); // Load the video after delay
+                    video.play(); // Then play the video
+                }, 4000); // 
+            };
+        </script>
+
+
+
+    
+</body>
+</html>

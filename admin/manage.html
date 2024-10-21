@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/alpinejs/3.10.5/cdn.min.js"
+      defer
+    ></script>
+  </head>
+  <body class="bg-gray-900 text-white min-h-screen py-12 px-4 sm:px-6 lg:px-8">
+    <div class="max-w-7xl mx-auto" x-data="adminDashboard()">
+      <div class="flex justify-between items-center mb-6">
+        <h1 class="text-3xl font-bold text-emerald-400">Admin Dashboard</h1>
+        <button
+          @click="logout"
+          class="bg-red-600 text-white py-2 px-4 rounded-md hover:bg-red-700"
+        >
+          Logout
+        </button>
+      </div>
+      <div class="space-y-4">
+        <div class="grid w-full grid-cols-3 bg-gray-800">
+          <button
+            @click="activeTab = 'turf'"
+            :class="{ 'bg-emerald-600 text-white': activeTab === 'turf' }"
+            class="py-2 px-4"
+          >
+            Manage Turf
+          </button>
+          <button
+            @click="activeTab = 'admin'"
+            :class="{ 'bg-emerald-600 text-white': activeTab === 'admin' }"
+            class="py-2 px-4"
+          >
+            Personal Details
+          </button>
+          <button
+            @click="activeTab = 'bookings'"
+            :class="{ 'bg-emerald-600 text-white': activeTab === 'bookings' }"
+            class="py-2 px-4"
+          >
+            Bookings
+          </button>
+        </div>
+
+        <!-- Turf Management Tab -->
+        <div
+          x-show="activeTab === 'turf'"
+          class="bg-gray-800 border border-gray-700 rounded-lg p-6"
+        >
+          <h2 class="text-2xl font-bold mb-4 text-emerald-400">
+            Manage Your Turf
+          </h2>
+          <form @submit.prevent="handleTurfUpdate" class="space-y-4">
+            <div class="grid grid-cols-2 gap-4">
+              <div class="space-y-2">
+                <label for="turfName" class="text-sm font-medium text-gray-300"
+                  >Turf Name</label
+                >
+                <input
+                  id="turfName"
+                  x-model="turfData.name"
+                  class="w-full bg-gray-700 border-gray-600 text-white rounded-md p-2"
+                />
+              </div>
+              <div class="space-y-2">
+                <label for="turfArea" class="text-sm font-medium text-gray-300"
+                  >Area</label
+                >
+                <input
+                  id="turfArea"
+                  x-model="turfData.area"
+                  class="w-full bg-gray-700 border-gray-600 text-white rounded-md p-2"
+                />
+              </div>
+              <div class="space-y-2">
+                <label for="turfCity" class="text-sm font-medium text-gray-300"
+                  >City</label
+                >
+                <input
+                  id="turfCity"
+                  x-model="turfData.city"
+                  class="w-full bg-gray-700 border-gray-600 text-white rounded-md p-2"
+                />
+              </div>
+              <div class="space-y-2">
+                <label
+                  for="turfRating"
+                  class="text-sm font-medium text-gray-300"
+                  >Rating</label
+                >
+                <input
+                  id="turfRating"
+                  type="number"
+                  step="0.1"
+                  min="0"
+                  max="5"
+                  x-model="turfData.rating"
+                  class="w-full bg-gray-700 border-gray-600 text-white rounded-md p-2"
+                />
+              </div>
+              <div class="space-y-2">
+                <label for="turfPhone" class="text-sm font-medium text-gray-300"
+                  >Phone</label
+                >
+                <input
+                  id="turfPhone"
+                  x-model="turfData.phone"
+                  class="w-full bg-gray-700 border-gray-600 text-white rounded-md p-2"
+                />
+              </div>
+              <div class="space-y-2">
+                <label for="turfEmail" class="text-sm font-medium text-gray-300"
+                  >Email</label
+                >
+                <input
+                  id="turfEmail"
+                  x-model="turfData.email"
+                  class="w-full bg-gray-700 border-gray-600 text-white rounded-md p-2"
+                />
+              </div>
+            </div>
+            <button
+              type="submit"
+              class="mt-4 bg-emerald-600 text-white py-2 px-4 rounded-md hover:bg-emerald-700"
+            >
+              Update Turf
+            </button>
+          </form>
+        </div>
+
+        <!-- Personal Details Tab -->
+        <div
+          x-show="activeTab === 'admin'"
+          class="bg-gray-800 border border-gray-700 rounded-lg p-6"
+        >
+          <h2 class="text-2xl font-bold mb-4 text-emerald-400">
+            Personal Details
+          </h2>
+          <form @submit.prevent="handleAdminUpdate" class="space-y-4">
+            <div class="space-y-2">
+              <label for="adminPhone" class="text-sm font-medium text-gray-300"
+                >Phone</label
+              >
+              <input
+                id="adminPhone"
+                x-model="adminData.phone"
+                class="w-full bg-gray-700 border-gray-600 text-white rounded-md p-2"
+              />
+            </div>
+            <div class="space-y-2">
+              <label for="adminEmail" class="text-sm font-medium text-gray-300"
+                >Email</label
+              >
+              <input
+                id="adminEmail"
+                x-model="adminData.email"
+                class="w-full bg-gray-700 border-gray-600 text-white rounded-md p-2"
+              />
+            </div>
+            <button
+              type="submit"
+              class="mt-4 bg-emerald-600 text-white py-2 px-4 rounded-md hover:bg-emerald-700"
+            >
+              Update Details
+            </button>
+          </form>
+        </div>
+
+        <!-- Bookings Tab -->
+        <div
+          x-show="activeTab === 'bookings'"
+          class="bg-gray-800 border border-gray-700 rounded-lg p-6"
+        >
+          <h2 class="text-2xl font-bold mb-4 text-emerald-400">Bookings</h2>
+          <table class="w-full text-left border-collapse">
+            <thead>
+              <tr>
+                <th class="border-b border-gray-700 p-2">ID</th>
+                <th class="border-b border-gray-700 p-2">Name</th>
+                <th class="border-b border-gray-700 p-2">Phone</th>
+                <th class="border-b border-gray-700 p-2">Email</th>
+                <th class="border-b border-gray-700 p-2">Time Slot</th>
+                <th class="border-b border-gray-700 p-2">Date</th>
+                <th class="border-b border-gray-700 p-2">Status</th>
+                <th class="border-b border-gray-700 p-2">Payment</th>
+              </tr>
+            </thead>
+            <tbody>
+              <template x-for="booking in bookings" :key="booking.id">
+                <tr>
+                  <td
+                    class="border-b border-gray-700 p-2"
+                    x-text="booking.id"
+                  ></td>
+                  <td
+                    class="border-b border-gray-700 p-2"
+                    x-text="booking.name"
+                  ></td>
+                  <td
+                    class="border-b border-gray-700 p-2"
+                    x-text="booking.phone"
+                  ></td>
+                  <td
+                    class="border-b border-gray-700 p-2"
+                    x-text="booking.email"
+                  ></td>
+                  <td
+                    class="border-b border-gray-700 p-2"
+                    x-text="booking.time_slot"
+                  ></td>
+                  <td
+                    class="border-b border-gray-700 p-2"
+                    x-text="booking.date"
+                  ></td>
+                  <td class="border-b border-gray-700 p-2">
+                    <select
+                      x-model="booking.status"
+                      @change="updateBookingStatus(booking.id, booking.status)"
+                      class="bg-gray-700 border-gray-600 text-white rounded-md p-2"
+                    >
+                      <option value="confirmed">Confirmed</option>
+                      <option value="cancelled">Cancelled</option>
+                    </select>
+                  </td>
+                  <td class="border-b border-gray-700 p-2">
+                    <select
+                      x-model="booking.payment_status"
+                      @change="updatePaymentStatus(booking.id, booking.payment_status)"
+                      class="bg-gray-700 border-gray-600 text-white rounded-md p-2"
+                    >
+                      <option value="done">Done</option>
+                      <option value="remaining">Remaining</option>
+                    </select>
+                  </td>
+                </tr>
+              </template>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      function adminDashboard() {
+        return {
+          activeTab: "bookings",
+          turfData: {
+            name: "",
+            area: "",
+            city: "",
+            address: "",
+            rating: "",
+            phone: "",
+            email: "",
+          },
+          adminData: {
+            phone: "",
+            email: "",
+          },
+          bookings: [],
+
+          // Fetch dashboard data from the backend
+          fetchDashboardData() {
+            fetch("fetch_dashboard_data.php")
+              .then((response) => response.json())
+              .then((data) => {
+                if (data.status === "success") {
+                  this.turfData = data.turfData;
+                  this.adminData = data.adminData;
+                  this.bookings =
+                    data.bookings.length > 0
+                      ? data.bookings
+                      : [
+                          {
+                            id: "-",
+                            name: "-",
+                            phone: "-",
+                            email: "-",
+                            time_slot: "-",
+                            date: "-",
+                            status: "-",
+                          },
+                        ];
+                } else {
+                  alert(data.message);
+                  this.bookings = [
+                    {
+                      id: "-",
+                      name: "-",
+                      phone: "-",
+                      email: "-",
+                      time_slot: "-",
+                      date: "-",
+                      status: "-",
+                    },
+                  ];
+                }
+              })
+              .catch((error) => {
+                console.error("Error fetching dashboard data:", error);
+                this.bookings = [
+                  {
+                    id: "-",
+                    name: "-",
+                    phone: "-",
+                    email: "-",
+                    time_slot: "-",
+                    date: "-",
+                    status: "-",
+                  },
+                ];
+              });
+          },
+
+          // Handle update of turf data
+          handleTurfUpdate() {
+            const formData = new FormData();
+            formData.append("name", this.turfData.name);
+            formData.append("area", this.turfData.area);
+            formData.append("city", this.turfData.city);
+            formData.append("address", this.turfData.address);
+            formData.append("rating", this.turfData.rating);
+            formData.append("phone", this.turfData.phone);
+            formData.append("email", this.turfData.email);
+
+            fetch("update_turf_data.php", {
+              method: "POST",
+              body: formData,
+            })
+              .then((response) => response.json())
+              .then((data) => {
+                if (data.status === "success") {
+                  alert("Turf data updated successfully!");
+                  this.fetchDashboardData(); // Refresh the dashboard data
+                } else {
+                  alert(data.message);
+                }
+              })
+              .catch((error) => {
+                console.error("Error updating turf data:", error);
+              });
+          },
+
+          // Handle update of admin data
+          handleAdminUpdate() {
+            const formData = new FormData();
+            formData.append("phone", this.adminData.phone);
+            formData.append("email", this.adminData.email);
+
+            fetch("update_admin_data.php", {
+              method: "POST",
+              body: formData,
+            })
+              .then((response) => response.json())
+              .then((data) => {
+                if (data.status === "success") {
+                  alert("Admin data updated successfully!");
+                  this.fetchDashboardData(); // Refresh the dashboard data
+                } else {
+                  alert(data.message);
+                }
+              })
+              .catch((error) => {
+                console.error("Error updating admin data:", error);
+              });
+          },
+
+          // Handle update of booking payment status
+          updatePaymentStatus(bookingId, paymentStatus) {
+            fetch("/turfbooking/php/update_payment_status.php", {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({
+                booking_id: bookingId,
+                payment_status: paymentStatus,
+              }),
+            })
+              .then((response) => response.json())
+              .then((data) => {
+                if (data.status === "success") {
+                  alert("Payment status updated successfully!");
+                  this.fetchDashboardData(); // Refresh the dashboard data
+                } else {
+                  alert(data.message);
+                }
+              })
+              .catch((error) => {
+                console.error("Error updating payment status:", error);
+              });
+          },
+
+          // Handle update of booking status
+          updateBookingStatus(bookingId, status) {
+            fetch("/turfbooking/php/update_booking_status.php", {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({ booking_id: bookingId, status: status }),
+            })
+              .then((response) => response.json())
+              .then((data) => {
+                if (data.status === "success") {
+                  alert("Booking status updated successfully!");
+                  this.fetchDashboardData(); // Refresh the dashboard data
+                } else {
+                  alert(data.message);
+                }
+              })
+              .catch((error) => {
+                console.error("Error updating booking status:", error);
+              });
+          },
+
+          // Handle logout
+          logout() {
+            // Implement your logout logic here
+            fetch("logout.php", {
+              method: "POST",
+            })
+              .then((response) => response.json())
+              .then((data) => {
+                if (data.status === "success") {
+                  window.location.href = "admin_login.html"; // Redirect to login page
+                } else {
+                  alert(data.message);
+                }
+              })
+              .catch((error) => {
+                console.error("Error logging out:", error);
+              });
+            alert("Logged out successfully!");
+          },
+
+          // Initialize the dashboard data
+          init() {
+            this.fetchDashboardData();
+          },
+        };
+      }
+    </script>
+  </body>
+</html>
